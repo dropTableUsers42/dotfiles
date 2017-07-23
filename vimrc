@@ -12,6 +12,7 @@ let g:solarized_termcolors=16
 let g:solarizedterm_trans=1
 colorscheme solarized
 set term=xterm-256color
+highlight SignColumn ctermbg=8
 
 "buffers
 set hidden
@@ -64,8 +65,11 @@ let mapleader = ","
 
 imap ;; <Esc>
 nmap ;; i
+inoremap ;, ;
+nnoremap ; :
 imap <Leader>, <Esc>$ka
 imap <Leader>{ {<Esc>$ka
+map <F9> :TagbarToggle<CR>
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -77,7 +81,7 @@ nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
 
-autocmd filetype cpp nnoremap <C-F4> :make<CR>
+autocmd filetype cpp nnoremap <F4> :make<CR>
 
 "vim-airline
 let g:airline_powerline_fonts = 1
@@ -111,17 +115,36 @@ if executable('ag')
 endif
 
 "indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_color_change_percent = 10
+let g:indent_guides_indent_levels = 30
+let g:indent_guides_start_level = 2
+autocmd VimEnter * highlight IndentGuidesEven ctermbg=241
+
+"guten-tags
+let g:gutentags_project_root = ['tags']
+autocmd User GutentagsUpdated :redraw!
+
+"syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 
 "Plug
 call plug#begin('$HOME/.vim/plugged')
 
-Plug 'Townk/vim-autoclose'
 Plug 'kien/ctrlp.vim'
 Plug 'dahu/vim-help'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/syntastic'
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
