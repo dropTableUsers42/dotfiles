@@ -53,7 +53,7 @@ set splitright
 "Cursor
 let &t_SI.="\e[6 q"
 let &t_EI.="\e[2 q"
-autocmd VimEnter * silent !echo -ne "\e[2 q"
+"autocmd VimEnter * silent !echo -ne "\e[2 q"
 set cursorline
 
 "remove beep (errorbell)
